@@ -1,12 +1,14 @@
-# Render Blueprint — deploys all 3 pieces of this POC in one step.
+# Render Blueprint — deploys 2 of this POC's 3 pieces (website + live-chat
+# proxy). Rasa itself runs on Hugging Face Spaces instead (see
+# rasa-bot/README.md) — Render's free tier (512MB RAM) isn't enough for
+# Rasa + TensorFlow at runtime; HF Spaces' free CPU tier (16GB) is.
+#
 # In the Render dashboard: New -> Blueprint -> connect this repo -> Apply.
 #
-# Service names below are chosen to match the URLs already hardcoded in
-# website/js/chat-widget.js and website/js/chatwoot-integration.js
-# (cdf-poc-rasa.onrender.com, cdf-poc-chatwoot-proxy.onrender.com). If any
-# of these names are already taken on Render (subdomains are global), you
-# will need to pick different ones here AND update those two JS files to
-# match — Render will tell you at Blueprint-creation time if a name collides.
+# "cdf-poc-website" is chosen to match ALLOWED_ORIGIN below and the URL
+# hardcoded in website/js/chatwoot-integration.js. If it's already taken on
+# Render (subdomains are global), you'll need to pick a different one here
+# AND update that JS file to match.
 #
 # The three CHATWOOT_* secrets are intentionally left blank here (sync:
 # false) — Render will prompt you to fill them in during Blueprint setup,
@@ -14,18 +16,6 @@
 # for what's needed.
 
 services:
-  - type: web
-    name: cdf-poc-rasa
-    env: docker
-    plan: free
-    dockerfilePath: ./rasa-bot/Dockerfile
-    dockerContext: ./rasa-bot
-    envVars:
-      - key: PYTHONUNBUFFERED
-        value: "1"
-      - key: PYTHONIOENCODING
-        value: "utf-8"
-
   - type: web
     name: cdf-poc-chatwoot-proxy
     env: node

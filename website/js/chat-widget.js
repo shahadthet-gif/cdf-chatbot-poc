@@ -11,7 +11,10 @@
   // where the page itself is being viewed from — never hardcode one or
   // the other here.
   var IS_LOCAL = ["localhost", "127.0.0.1"].indexOf(location.hostname) !== -1;
-  var RASA_URL = (IS_LOCAL ? "http://localhost:5005" : "https://cdf-poc-rasa.onrender.com") + "/webhooks/rest/webhook";
+  // Rasa itself runs on Hugging Face Spaces (see rasa-bot/README.md) rather
+  // than Render — Render's free tier (512MB RAM) isn't enough for
+  // Rasa + TensorFlow at runtime; HF Spaces' free CPU tier (16GB) is.
+  var RASA_URL = (IS_LOCAL ? "http://localhost:5005" : "https://shahadalh-3-cdf-chatbot-rasa.hf.space") + "/webhooks/rest/webhook";
 
   var TEXT = {
     ar: {
