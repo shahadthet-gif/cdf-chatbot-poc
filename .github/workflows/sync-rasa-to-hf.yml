@@ -25,4 +25,9 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git remote add hf-rasa "https://user:${HF_TOKEN}@huggingface.co/spaces/shahadalh-3/cdf-chatbot-rasa"
-          git subtree push --prefix=rasa-bot hf-rasa main
+          # Force-push: the Space starts with an auto-generated placeholder
+          # README with no shared history with this repo, so a normal push
+          # is correctly rejected as a non-fast-forward. Safe to overwrite
+          # since that placeholder isn't real work.
+          git subtree split --prefix=rasa-bot -b hf-rasa-branch
+          git push hf-rasa hf-rasa-branch:main --force
