@@ -14,12 +14,16 @@ Two fixes over plain `http.server`:
    can't keep up and requests start timing out as 502s. ThreadingHTTPServer
    fixes this by handling each request on its own thread.
 
-Usage: py -3.14 serve.py [port]   (defaults to 5500)
+Usage: py -3.14 serve.py [port]   (defaults to 5500, or $PORT if set —
+Render and most PaaS hosts inject that env var, which is why this also runs
+there as a plain Python web service instead of Render's dedicated "static
+site" type.)
 """
 import http.server
+import os
 import sys
 
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 5500
+PORT = int(os.environ.get("PORT") or (sys.argv[1] if len(sys.argv) > 1 else 5500))
 
 
 class NoCacheHandler(http.server.SimpleHTTPRequestHandler):

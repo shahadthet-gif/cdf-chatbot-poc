@@ -43,8 +43,10 @@ services:
       - key: ALLOWED_ORIGIN
         value: https://cdf-poc-website.onrender.com
 
-  - type: static
+  - type: web
     name: cdf-poc-website
+    env: python
+    plan: free
     rootDir: website
     buildCommand: ""
-    staticPublishPath: .
+    startCommand: python serve.py
