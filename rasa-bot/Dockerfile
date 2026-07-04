@@ -27,4 +27,6 @@ ENV PYTHONIOENCODING=utf-8
 
 # Render (and most PaaS hosts) inject $PORT at runtime — shell-form CMD so
 # it's substituted when the container starts, not baked in at build time.
-CMD rasa run --enable-api --cors "*" --credentials credentials.yml --endpoints endpoints.yml --port $PORT
+# Hugging Face Spaces defaults to port 7860 and may not set $PORT at all,
+# hence the fallback.
+CMD rasa run --enable-api --cors "*" --credentials credentials.yml --endpoints endpoints.yml --port ${PORT:-7860}

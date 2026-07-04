@@ -1,3 +1,13 @@
+---
+title: CDF Chatbot Rasa Backend
+emoji: 🤖
+colorFrom: gray
+colorTo: gray
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # CDF Chatbot — Rasa Bot
 
 A bilingual (Arabic + English) Rasa Open Source assistant. One mixed-language
