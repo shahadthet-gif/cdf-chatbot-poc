@@ -1,0 +1,13 @@
+{
+  "name": "cdf-chatwoot-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bridges the CDF chatbot's custom chat UI to Chatwoot's official Application API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

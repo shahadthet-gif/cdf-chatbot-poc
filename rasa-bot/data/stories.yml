@@ -1,0 +1,112 @@
+version: "3.1"
+
+stories:
+- story: full happy path in English (apply for services)
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "en"
+    - action: utter_greet
+    - intent: show_apply_menu
+    - action: utter_show_apply_menu
+    - intent: ask_about_funding_services
+    - action: utter_ask_about_funding_services
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: ask_about_enablement_services
+    - action: utter_ask_about_enablement_services
+    - intent: thank_you
+    - action: utter_thank_you
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: full happy path in Arabic (learn more)
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "ar"
+    - action: utter_greet
+    - intent: show_learn_more_menu
+    - action: utter_show_learn_more_menu
+    - intent: ask_about_strategy
+    - action: utter_ask_about_strategy
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: ask_about_success_stories
+    - action: utter_ask_about_success_stories
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: user asks for a human mid-conversation
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "en"
+    - action: utter_greet
+    - intent: ask_about_fund
+    - action: utter_ask_about_fund
+    - intent: request_human_agent
+    - action: utter_handoff_to_agent
+
+- story: bot gets confused then user asks for a human
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "ar"
+    - action: utter_greet
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+    - intent: request_human_agent
+    - action: utter_handoff_to_agent
+
+- story: user browses the contact submenu then talks to an employee
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "en"
+    - action: utter_greet
+    - intent: show_contact_menu
+    - action: utter_show_contact_menu
+    - intent: ask_about_direct_contact
+    - action: utter_ask_about_direct_contact
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_contact_menu
+    - action: utter_show_contact_menu
+    - intent: request_human_agent
+    - action: utter_handoff_to_agent
+
+- story: user checks digital channels and visual identity
+  steps:
+    - intent: widget_opened
+    - action: utter_choose_language
+    - intent: greet
+      entities:
+        - language: "ar"
+    - action: utter_greet
+    - intent: show_contact_menu
+    - action: utter_show_contact_menu
+    - intent: ask_about_digital_channels
+    - action: utter_ask_about_digital_channels
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_learn_more_menu
+    - action: utter_show_learn_more_menu
+    - intent: ask_about_visual_identity
+    - action: utter_ask_about_visual_identity
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_learn_more_menu
+    - action: utter_show_learn_more_menu
+    - intent: ask_about_news
+    - action: utter_ask_about_news

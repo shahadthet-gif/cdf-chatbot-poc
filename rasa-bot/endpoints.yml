@@ -1,0 +1,9 @@
+# This POC has no custom Python actions — the language switch is handled by
+# a declarative slot mapping, and the human-handoff signal is a static
+# `custom` payload on a response (see domain.yml: utter_handoff_to_agent).
+# That means no action server is needed, so `action_endpoint` is intentionally
+# left unset. If custom actions are added later, uncomment this and run
+# `rasa run actions` in its own venv:
+#
+# action_endpoint:
+#   url: "http://localhost:5055/webhook"

@@ -1,0 +1,442 @@
+version: "3.1"
+
+intents:
+  - widget_opened
+  - greet
+  - goodbye
+  - thank_you
+  - bot_challenge
+  - ask_about_fund
+  - show_menu
+  - show_apply_menu
+  - show_learn_more_menu
+  - show_contact_menu
+  - ask_about_funding_services
+  - ask_about_enablement_services
+  - ask_about_strategy
+  - ask_about_success_stories
+  - ask_about_visual_identity
+  - ask_about_news
+  - ask_about_digital_channels
+  - ask_about_direct_contact
+  - request_human_agent
+  - out_of_scope
+
+entities:
+  - language
+
+slots:
+  language:
+    type: categorical
+    values:
+      - ar
+      - en
+    initial_value: ar
+    mappings:
+      - type: from_entity
+        entity: language
+
+responses:
+  utter_choose_language:
+    - text: "Welcome! To help you best, please choose your preferred language / أهلاً بك! فضلاً اختر اللغة التي تفضلها"
+      buttons:
+        - title: "English"
+          payload: '/greet{"language": "en"}'
+        - title: "العربية"
+          payload: '/greet{"language": "ar"}'
+
+  utter_greet:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "أهلاً وسهلاً بك في الصندوق الثقافي! نسعد بسعيك نحو تعزيز الثقافة والإبداع. كيف يمكنني مساعدتك اليوم؟"
+      buttons:
+        - title: "أريد التقديم على خدمات الصندوق"
+          payload: '/show_apply_menu'
+        - title: "أريد معرفة المزيد عن الصندوق"
+          payload: '/show_learn_more_menu'
+        - title: "أريد التواصل مع الصندوق"
+          payload: '/show_contact_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Welcome to the Cultural Development Fund! We're glad to support your journey in culture and creativity. How can I help you today?"
+      buttons:
+        - title: "Apply for Fund Services"
+          payload: '/show_apply_menu'
+        - title: "Learn More About the Fund"
+          payload: '/show_learn_more_menu'
+        - title: "Contact the Fund"
+          payload: '/show_contact_menu'
+
+  utter_show_menu:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "كيف يمكنني مساعدتك أكثر؟"
+      buttons:
+        - title: "أريد التقديم على خدمات الصندوق"
+          payload: '/show_apply_menu'
+        - title: "أريد معرفة المزيد عن الصندوق"
+          payload: '/show_learn_more_menu'
+        - title: "أريد التواصل مع الصندوق"
+          payload: '/show_contact_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "How else can I help you?"
+      buttons:
+        - title: "Apply for Fund Services"
+          payload: '/show_apply_menu'
+        - title: "Learn More About the Fund"
+          payload: '/show_learn_more_menu'
+        - title: "Contact the Fund"
+          payload: '/show_contact_menu'
+
+  utter_show_apply_menu:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "التقديم على الخدمات"
+      buttons:
+        - title: "التمويل الثقافي"
+          payload: '/ask_about_funding_services'
+        - title: "خدمات نماء التمكينية"
+          payload: '/ask_about_enablement_services'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Apply for Services"
+      buttons:
+        - title: "Cultural Funding"
+          payload: '/ask_about_funding_services'
+        - title: "Namaa Enablement Services"
+          payload: '/ask_about_enablement_services'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_show_learn_more_menu:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "ماذا تريد أن تعرف بالتحديد؟"
+      buttons:
+        - title: "استراتيجية الصندوق"
+          payload: '/ask_about_strategy'
+        - title: "قصص نجاح دعمها الصندوق"
+          payload: '/ask_about_success_stories'
+        - title: "الهوية البصرية"
+          payload: '/ask_about_visual_identity'
+        - title: "آخر الأخبار"
+          payload: '/ask_about_news'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "What would you like to know about specifically?"
+      buttons:
+        - title: "Fund Strategy"
+          payload: '/ask_about_strategy'
+        - title: "Success Stories"
+          payload: '/ask_about_success_stories'
+        - title: "Visual Identity"
+          payload: '/ask_about_visual_identity'
+        - title: "Latest News"
+          payload: '/ask_about_news'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_show_contact_menu:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "نسعد بتواصلك معنا، ورحّب بخدمتك على مختلف قنوات التواصل. اختر طريقة التواصل المناسبة لك."
+      buttons:
+        - title: "عبر القنوات الرقمية"
+          payload: '/ask_about_digital_channels'
+        - title: "عبر الاتصال المباشر"
+          payload: '/ask_about_direct_contact'
+        - title: "التحدث إلى موظف"
+          payload: '/request_human_agent'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "We're glad to hear from you, on whichever channel works best for you. Choose how you'd like to get in touch."
+      buttons:
+        - title: "Digital Channels"
+          payload: '/ask_about_digital_channels'
+        - title: "Direct Contact"
+          payload: '/ask_about_direct_contact'
+        - title: "Talk to an Employee"
+          payload: '/request_human_agent'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_fund:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "تأسس الصندوق الثقافي بمرسوم ملكي عام 2021م، ليُنمّي إمكانات المشاريع الثقافية ويُثري خبرة الرياديين في القطاع الثقافي في المملكة."
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "The Cultural Development Fund was established by royal decree in 2021 to unlock the potential of cultural projects and enrich entrepreneurial experience in the Kingdom's cultural sector."
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_funding_services:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "يمنحك التمويل الثقافي سيولة مالية تلبي احتياجات مشروعك الثقافي عبر حلول تمويلية متنوعة، ومدد زمنية مرنة تصل إلى 10 سنوات، ونسب فوائد تنافسية."
+      buttons:
+        - title: "للمزيد"
+          payload: 'https://cdf.gov.sa/services/037019d7-9ff4-4aac-bbe6-a86738c9bdc4'
+        - title: "للتقديم"
+          payload: 'https://cdf.gov.sa/services/037019d7-9ff4-4aac-bbe6-a86738c9bdc4'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Cultural Funding gives you the financial liquidity to meet your cultural project's needs through diverse financing solutions, flexible terms of up to 10 years, and competitive rates."
+      buttons:
+        - title: "Learn More"
+          payload: 'https://cdf.gov.sa/services/037019d7-9ff4-4aac-bbe6-a86738c9bdc4'
+        - title: "Apply Now"
+          payload: 'https://cdf.gov.sa/services/037019d7-9ff4-4aac-bbe6-a86738c9bdc4'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_enablement_services:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "خدمات نماء التمكينية تقدّم الدعم غير المالي للممارسين والمنشآت الثقافية، مثل الاستشارات والتدريب وبناء القدرات."
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Namaa's enablement services provide non-financial support to cultural practitioners and enterprises, such as consulting, training, and capacity building."
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_strategy:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "رؤيتنا: نسعى لترسيخ مكانة المملكة العربية السعودية وريادتها في مجال الثقافة عالميًا من خلال التمويل المستدام للقطاع الثقافي.\n\nرسالتنا: نمكّن القطاع الثقافي من خلال تطوير آليات تمويل مستدامة، ومتنوعة المصدر، وخلق شراكات داعمة لتعزيز الأثر الاجتماعي والاقتصادي."
+      buttons:
+        - title: "عرض الاستراتيجية كاملة"
+          payload: 'https://cdf.gov.sa/about-us/strategy'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Our Vision: To help establish the Kingdom of Saudi Arabia's global standing and leadership in culture through sustainable financing of the cultural sector.\n\nOur Mission: We enable the cultural sector by developing sustainable, diversely-sourced financing mechanisms and building supportive partnerships to enhance social and economic impact."
+      buttons:
+        - title: "View Full Strategy"
+          payload: 'https://cdf.gov.sa/about-us/strategy'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_success_stories:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "يدعم الصندوق الثقافي عددًا من قصص النجاح الملهمة في القطاع الثقافي، مثل منصة تفنن، ومزن، وحرفة، ومكتبة أما بعد، وياقوت."
+      buttons:
+        - title: "عرض جميع القصص"
+          payload: 'https://cdf.gov.sa/success-stories'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "The Cultural Development Fund has supported a number of inspiring success stories in the cultural sector, such as Tafanan, Mozn, Herfah, Amma Baad Library, and Yaqoot."
+      buttons:
+        - title: "View All Stories"
+          payload: 'https://cdf.gov.sa/success-stories'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_visual_identity:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "الهوية البصرية للصندوق الثقافي تعكس رؤيته وريادته في دعم القطاع الثقافي."
+      image: "/assets/images/logo.png"
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "The Cultural Development Fund's visual identity reflects its vision and leadership in supporting the cultural sector."
+      image: "/assets/images/logo.png"
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_news:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "يمكنك متابعة آخر أخبار الصندوق الثقافي، ومشاركاته المحلية والدولية، واتفاقياته وشراكاته الجديدة."
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "You can follow the Cultural Development Fund's latest news, local and international engagements, and new agreements and partnerships."
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_digital_channels:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "يمكنك التواصل معنا عبر القنوات الرقمية بتعبئة نموذج التواصل، وسيقوم فريقنا بالرد عليك في أقرب وقت."
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "You can reach us through our digital channels by filling out the contact form, and our team will get back to you as soon as possible."
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_direct_contact:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "يسعدنا تواصلك معنا عبر:\n📞 مركز الاتصال الموحد: 8001000313\n✉️ البريد الإلكتروني: info@cdf.gov.sa\n📍 الرياض، مركز الملك عبدالله المالي"
+      buttons:
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "You can reach us via:\n📞 Unified Contact Center: 8001000313\n✉️ Email: info@cdf.gov.sa\n📍 Riyadh, King Abdullah Financial District"
+      buttons:
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_goodbye:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "شكرًا لتواصلك معنا، نتمنى لك يومًا سعيدًا!"
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Thanks for reaching out, have a great day!"
+
+  utter_thank_you:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "على الرحب والسعة! هل هناك أي شيء آخر يمكنني مساعدتك به؟"
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "You're welcome! Is there anything else I can help you with?"
+
+  utter_bot_challenge:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "أنا مساعد افتراضي للصندوق الثقافي، هنا لمساعدتك في أي وقت."
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "I'm a virtual assistant for the Cultural Development Fund, here to help you anytime."
+
+  utter_out_of_scope:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "عذرًا، لم أفهم ذلك تمامًا. يمكنك إعادة صياغة سؤالك، أو التواصل معنا."
+      buttons:
+        - title: "تواصل معنا"
+          payload: '/show_contact_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Sorry, I didn't quite understand that. You can rephrase your question, or contact us."
+      buttons:
+        - title: "Contact Us"
+          payload: '/show_contact_menu'
+
+  utter_handoff_to_agent:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      custom:
+        action: "handoff_to_chatwoot"
+        text: "بالتأكيد، جاري تحويلك الآن إلى أحد موظفي الدعم..."
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      custom:
+        action: "handoff_to_chatwoot"
+        text: "Sure, connecting you with one of our support agents now..."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

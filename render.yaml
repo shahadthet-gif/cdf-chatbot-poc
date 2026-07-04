@@ -1,0 +1,50 @@
+# Render Blueprint — deploys all 3 pieces of this POC in one step.
+# In the Render dashboard: New -> Blueprint -> connect this repo -> Apply.
+#
+# Service names below are chosen to match the URLs already hardcoded in
+# website/js/chat-widget.js and website/js/chatwoot-integration.js
+# (cdf-poc-rasa.onrender.com, cdf-poc-chatwoot-proxy.onrender.com). If any
+# of these names are already taken on Render (subdomains are global), you
+# will need to pick different ones here AND update those two JS files to
+# match — Render will tell you at Blueprint-creation time if a name collides.
+#
+# The three CHATWOOT_* secrets are intentionally left blank here (sync:
+# false) — Render will prompt you to fill them in during Blueprint setup,
+# so they never sit in this committed file. See chatwoot-proxy/.env.example
+# for what's needed.
+
+services:
+  - type: web
+    name: cdf-poc-rasa
+    env: docker
+    plan: free
+    dockerfilePath: ./rasa-bot/Dockerfile
+    dockerContext: ./rasa-bot
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONIOENCODING
+        value: "utf-8"
+
+  - type: web
+    name: cdf-poc-chatwoot-proxy
+    env: node
+    plan: free
+    rootDir: chatwoot-proxy
+    buildCommand: ""
+    startCommand: node server.js
+    envVars:
+      - key: CHATWOOT_ACCOUNT_ID
+        sync: false
+      - key: CHATWOOT_API_TOKEN
+        sync: false
+      - key: CHATWOOT_INBOX_ID
+        sync: false
+      - key: ALLOWED_ORIGIN
+        value: https://cdf-poc-website.onrender.com
+
+  - type: static
+    name: cdf-poc-website
+    rootDir: website
+    buildCommand: ""
+    staticPublishPath: .

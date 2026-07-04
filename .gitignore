@@ -1,0 +1,22 @@
+# Secrets — never commit
+chatwoot-proxy/.env
+
+# Rasa
+rasa-bot/.venv/
+rasa-bot/models/
+rasa-bot/.rasa/
+rasa-bot/*.log
+
+# Proxy
+chatwoot-proxy/*.log
+node_modules/
+
+# Misc local-only
+tools/cloudflared.exe
+.claude/
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+Thumbs.db

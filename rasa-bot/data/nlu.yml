@@ -1,0 +1,258 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hi there
+    - hey
+    - good morning
+    - good evening
+    - hey there
+    - hello there
+    - مرحبا
+    - مرحباً
+    - السلام عليكم
+    - أهلا
+    - أهلاً
+    - صباح الخير
+    - مساء الخير
+    - هلا
+    - يا هلا
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - see you later
+    - bye bye
+    - talk to you later
+    - مع السلامة
+    - إلى اللقاء
+    - وداعا
+    - باي
+    - سلام
+
+- intent: thank_you
+  examples: |
+    - thank you
+    - thanks
+    - thank you so much
+    - appreciate it
+    - thanks a lot
+    - شكرا
+    - شكراً جزيلاً
+    - يعطيك العافية
+    - مشكور
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot
+    - are you a human
+    - am I talking to a robot
+    - are you real
+    - is this an AI
+    - هل أنت بوت
+    - هل أنت روبوت
+    - هل أنت إنسان
+    - انت شخص حقيقي؟
+
+- intent: ask_about_fund
+  examples: |
+    - what is the cultural development fund
+    - tell me about the fund
+    - what does CDF do
+    - when was the fund established
+    - what is your mission
+    - about the fund
+    - ما هو الصندوق الثقافي
+    - عرفني عن الصندوق
+    - متى تأسس الصندوق
+    - ما هي رؤية الصندوق
+    - معلومات عن الصندوق الثقافي
+
+- intent: ask_about_funding_services
+  examples: |
+    - what funding services do you offer
+    - how can I get funding
+    - tell me about cultural funding
+    - what financing options are available
+    - I want to know about funding
+    - do you provide loans
+    - ما هي خدمات التمويل الثقافي
+    - كيف أحصل على تمويل
+    - أريد معرفة خيارات التمويل
+    - هل تقدمون قروض
+    - التمويل الثقافي
+
+- intent: ask_about_enablement_services
+  examples: |
+    - what is namaa
+    - tell me about enablement services
+    - what non-financial support do you offer
+    - do you offer training or consulting
+    - what is namaa enablement
+    - ما هي خدمات نماء التمكينية
+    - ما هو نماء
+    - هل تقدمون استشارات
+    - أريد معرفة خدمات نماء
+    - خدمات التمكين
+
+- intent: show_apply_menu
+  examples: |
+    - I want to apply for a service
+    - I want to apply for fund services
+    - how do I apply
+    - I'd like to apply
+    - what services can I apply for
+    - أريد التقديم على خدمات الصندوق
+    - أبغى أقدم على خدمة
+    - كيف أقدم على خدمة
+    - أريد التقديم
+    - وش الخدمات الي أقدر أقدم عليها
+
+- intent: show_learn_more_menu
+  examples: |
+    - I want to know more about the fund
+    - tell me more about the fund
+    - I'd like to learn more
+    - more information about the fund
+    - أريد معرفة المزيد عن الصندوق
+    - أبغى أعرف أكثر عن الصندوق
+    - أريد معلومات أكثر عن الصندوق
+    - عطني معلومات أكثر
+
+- intent: show_contact_menu
+  examples: |
+    - how can I contact you
+    - how do I reach the fund
+    - contact information
+    - contact us
+    - give me your contact details
+    - how can I get in touch
+    - I want to contact the fund
+    - كيف أتواصل معكم
+    - كيف أتواصل مع الصندوق
+    - معلومات التواصل
+    - تواصل معنا
+    - أعطني وسيلة تواصل
+    - كيف أوصلكم
+    - أريد التواصل مع الصندوق
+
+- intent: ask_about_direct_contact
+  examples: |
+    - what's your phone number
+    - what's your email address
+    - what's your customer service number
+    - give me your phone number
+    - ما هو رقم هاتفكم
+    - ما هو بريدكم الإلكتروني
+    - رقم خدمة العملاء
+    - عطني رقم التواصل المباشر
+
+- intent: out_of_scope
+  examples: |
+    - what's the weather today
+    - can you book me a flight
+    - tell me a joke
+    - what's your favorite color
+    - how old are you
+    - what is the meaning of life
+    - what's the capital of France
+    - can you help me with my homework
+    - what time is it
+    - recommend me a good restaurant
+    - how do I fix my printer
+    - what's 2 plus 2
+    - sing me a song
+    - what's your opinion on politics
+    - can you order me a pizza
+    - what movies do you like
+    - how do I learn to cook
+    - tell me about the stock market
+    - what's the best programming language
+    - can you help me plan a trip
+    - ما هي حالة الطقس
+    - احجز لي رحلة طيران
+    - قول لي نكتة
+    - كم عمرك
+    - ما معنى الحياة
+    - ما هي عاصمة فرنسا
+    - ساعدني في واجبي المدرسي
+    - كم الساعة الآن
+    - رشح لي مطعم جيد
+    - كيف أصلح طابعتي
+    - كم يساوي اثنين زائد اثنين
+    - غني لي أغنية
+    - ما رأيك في السياسة
+    - اطلب لي بيتزا
+    - ما هي أفضل لغة برمجة
+
+- intent: request_human_agent
+  examples: |
+    - I want to talk to a human
+    - I need a human agent
+    - connect me to an agent
+    - can I speak to a real person
+    - talk to a representative
+    - I want to speak with an employee
+    - transfer me to an agent
+    - get me a human
+    - I need to talk to someone
+    - can I chat with a person
+    - I want customer service
+    - put me through to an agent
+    - is there a real person I can talk to
+    - I don't want a bot, I want a human
+    - connect me with support
+    - talk to a live agent
+    - I want to speak to staff
+    - human please
+    - human
+    - agent
+    - representative
+    - real person
+    - live agent
+    - customer service
+    - can you transfer me to a human
+    - I need help from a real person
+    - escalate to a human
+    - I'd like to speak with someone from your team
+    - please connect me to customer support
+    - can someone help me directly
+    - is anyone there I can talk to
+    - I want to file a complaint with an agent
+    - can a staff member assist me
+    - I need to speak with a representative now
+    - hand me over to an agent
+    - أريد التحدث مع موظف
+    - أبغى أتكلم مع موظف
+    - أبي موظف
+    - أريد التحدث مع شخص حقيقي
+    - حولني لموظف
+    - أريد خدمة العملاء
+    - ابغى احد يساعدني
+    - أريد التحدث مع انسان
+    - وصلني بموظف
+    - أحتاج مساعدة من موظف
+    - ممكن أتكلم مع أحد
+    - أبغى مندوب
+    - أبي مسؤول
+    - هل يوجد شخص حقيقي أتكلم معه
+    - لا أريد بوت أريد إنسان
+    - وصلني بالدعم الفني
+    - أحتاج أتكلم مع مسؤول الآن
+    - ممكن تحولني لموظف الدعم
+    - أريد التحدث مع فريق الدعم
+    - أبغى موظف يساعدني بمشكلتي
+    - كلمني موظف من فضلك
+    - موظف
+    - انسان
+    - بشري
+    - مندوب
+    - مسؤول
+    - دعم فني
+    - خدمة عملاء
+    - شخص حقيقي
