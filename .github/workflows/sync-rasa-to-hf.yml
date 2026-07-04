@@ -1,0 +1,28 @@
+name: Sync rasa-bot to Hugging Face Space
+
+# Runs on GitHub's own servers, not the developer's machine — this exists
+# because a git push to huggingface.co directly from one particular local
+# machine hit a TLS trust issue unrelated to the code itself. Pushing from
+# here sidesteps that entirely.
+on:
+  push:
+    branches: [main]
+    paths: ["rasa-bot/**"]
+  workflow_dispatch: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push rasa-bot/ subtree to the Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git remote add hf-rasa "https://user:${HF_TOKEN}@huggingface.co/spaces/shahadalh-3/cdf-chatbot-rasa"
+          git subtree push --prefix=rasa-bot hf-rasa main
