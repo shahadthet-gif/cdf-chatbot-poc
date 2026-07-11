@@ -1,0 +1,26 @@
+services:
+  website:
+    build:
+      context: ./Website
+      dockerfile: Dockerfile
+    container_name: website
+    ports:
+      - "5500:5500"
+
+  rasa:
+    build:
+      context: ./rasa-bot
+      dockerfile: Dockerfile
+    container_name: rasa
+    ports:
+      - "7860:7860"
+
+  chatwoot-proxy:
+    build:
+      context: ./chatwoot-proxy
+      dockerfile: Dockerfile
+    container_name: chatwoot-proxy
+    env_file:
+      - ./chatwoot-proxy/.env
+    ports:
+      - "5600:5600"

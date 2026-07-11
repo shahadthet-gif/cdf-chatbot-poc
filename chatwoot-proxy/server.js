@@ -1,25 +1,4 @@
-/**
- * CDF live-chat proxy.
- *
- * Bridges the website's custom chat UI to Chatwoot's official, documented
- * Application API (https://developers.chatwoot.com/api-reference) so agent
- * replies render as plain bubbles inside our own black/white panel instead
- * of Chatwoot's separate widget UI.
- *
- * This exists ONLY because CHATWOOT_API_TOKEN grants full read/write access
- * to the whole Chatwoot account — it must never be sent to a browser, so all
- * Chatwoot calls happen server-side, here, and the frontend only ever talks
- * to this proxy's small, unprivileged endpoints.
- *
- * All config comes from environment variables (see .env.example) rather
- * than being hardcoded, so the real secret never has to touch git history.
- * For local dev, values are read from a .env file next to this script if
- * present (gitignored — see chatwoot-proxy/README.md to set yours up).
- *
- * No npm dependencies — plain Node (built-in http module + global fetch),
- * including the tiny .env parser below, so `node server.js` is all that's
- * needed either locally or on a host like Render.
- */
+
 "use strict";
 
 const http = require("http");
@@ -36,18 +15,14 @@ const path = require("path");
       }
     });
   } catch (e) {
-    // No .env file — fine when real environment variables are set instead
-    // (e.g. in Render's dashboard).
+  
   }
 })();
 
 const CHATWOOT_ACCOUNT_ID = process.env.CHATWOOT_ACCOUNT_ID;
 const CHATWOOT_API_TOKEN = process.env.CHATWOOT_API_TOKEN;
 
-// The "CDF Custom Chat Backend" inbox — a Channel::Api inbox created
-// specifically for this integration. Kept separate from the "CDF Website"
-// Website-Widget inbox, which stays around only as the fallback path (see
-// website/js/chatwoot-integration.js) if this proxy is ever unreachable.
+
 const CHATWOOT_INBOX_ID = process.env.CHATWOOT_INBOX_ID;
 
 if (!CHATWOOT_ACCOUNT_ID || !CHATWOOT_API_TOKEN || !CHATWOOT_INBOX_ID) {
@@ -62,7 +37,6 @@ const CHATWOOT_BASE = `https://app.chatwoot.com/api/v1/accounts/${CHATWOOT_ACCOU
 const PORT = process.env.PORT || 5600;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "http://localhost:5500";
 
-// sessionId (the same id the website already uses for Rasa) -> Chatwoot ids
 const sessions = new Map();
 
 async function chatwootFetch(path, options) {

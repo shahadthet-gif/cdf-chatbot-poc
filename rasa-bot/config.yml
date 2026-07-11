@@ -1,9 +1,7 @@
 recipe: default.v1
 assistant_id: cdf_chatbot_poc
 
-# Language is a label only here — no pretrained language-specific components
-# (e.g. SpacyNLP) are used, so this pipeline is trained on mixed Arabic +
-# English data from data/nlu.yml and understands both in a single model.
+
 language: ar
 
 pipeline:

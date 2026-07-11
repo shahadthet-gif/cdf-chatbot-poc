@@ -14,7 +14,7 @@
   // Rasa itself runs on Hugging Face Spaces (see rasa-bot/README.md) rather
   // than Render — Render's free tier (512MB RAM) isn't enough for
   // Rasa + TensorFlow at runtime; HF Spaces' free CPU tier (16GB) is.
-  var RASA_URL = (IS_LOCAL ? "http://localhost:5005" : "https://shahadalh-3-cdf-chatbot-rasa.hf.space") + "/webhooks/rest/webhook";
+  var RASA_URL = (IS_LOCAL ? "http://localhost:7860" : "https://shahadalh-3-cdf-chatbot-rasa.hf.space") + "/webhooks/rest/webhook";
 
   var TEXT = {
     ar: {
