@@ -1,0 +1,24 @@
+
+services:
+  website:
+    image: shahalharbi/cdf-website:v1
+    container_name: website
+    ports:
+      - "5500:5500"
+    restart: unless-stopped
+
+  rasa:
+    image: shahalharbi/cdf-rasa:v1
+    container_name: rasa
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
+
+  chatwoot-proxy:
+    image: shahalharbi/cdf-chatwoot-proxy:v1
+    container_name: chatwoot-proxy
+    env_file:
+      - ./chatwoot-proxy/.env
+    ports:
+      - "5600:5600"
+    restart: unless-stopped
