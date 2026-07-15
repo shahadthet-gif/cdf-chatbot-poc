@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatwoot-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatwoot-proxy
+  template:
+    metadata:
+      labels:
+        app: chatwoot-proxy
+    spec:
+      containers:
+       - name: chatwoot
+         image: cdfchatbot-chatwoot-proxy:latest 
+         ports:
+          - containerPort: 5600
+         envFrom:
+          - configMapRef:
+             name: chatwoot-config
+          - secretRef:
+             name: chatwoot-secret

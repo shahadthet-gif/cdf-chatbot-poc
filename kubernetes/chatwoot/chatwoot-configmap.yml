@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chatwoot-config
+
+data:
+  PORT: "5600"
+  ALLOWED_ORIGIN: "http://localhost:5500"
