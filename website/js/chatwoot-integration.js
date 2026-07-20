@@ -1,26 +1,13 @@
-/**
- * Two-tier Chatwoot Cloud (free tier) integration.
- *
- * Tier 1 (primary): our own local proxy (see chatwoot-proxy/server.js),
- * which talks to Chatwoot's official Application API server-side. Agent
- * replies render as normal bubbles inside our own custom panel — no
- * Chatwoot UI is ever shown to the visitor.
- *
- * Tier 2 (fallback): if the proxy is unreachable for any reason, we fall
- * back to Chatwoot's own embedded widget (hidden by default, toggled open
- * on demand) so handoff never fully breaks even if Tier 1 has a problem.
- */
+
 (function () {
   "use strict";
 
   var CHATWOOT_BASE_URL = "https://app.chatwoot.com";
-  var CHATWOOT_WEBSITE_TOKEN = "ybwz3LtujzQ298cY9JC3tQ9w"; // fallback widget only
+  var CHATWOOT_WEBSITE_TOKEN = "ybwz3LtujzQ298cY9JC3tQ9w";
 
-  // Same static files serve both local dev and the deployed Render site
-  // (no build step) — pick the right proxy backend at runtime instead of
-  // hardcoding one. See chatwoot-proxy/README.md.
+
   var IS_LOCAL = ["localhost", "127.0.0.1"].indexOf(location.hostname) !== -1;
-  var PROXY_BASE_URL = IS_LOCAL ? "http://localhost:5600" : "https://cdf-poc-chatwoot-proxy.onrender.com";
+  var PROXY_BASE_URL = "";
 
   var isWidgetConfigured = Boolean(CHATWOOT_WEBSITE_TOKEN);
   var sdkReady = false;
@@ -52,9 +39,7 @@
     sdkReady = true;
   });
 
-  // ---------------------------------------------------------------
-  // Tier 1 — our proxy + Chatwoot's official Application API
-  // ---------------------------------------------------------------
+
   var liveChat = {
     pollTimer: null,
     lastMessageId: 0,
@@ -112,9 +97,7 @@
   };
   window.cdfLiveChat = liveChat;
 
-  // ---------------------------------------------------------------
-  // Tier 2 (fallback) — official embedded widget, toggled open
-  // ---------------------------------------------------------------
+
   window.cdfTriggerHandoff = function (onOpened) {
     if (!isWidgetConfigured) {
       window.dispatchEvent(new CustomEvent("cdf:handoff-unavailable"));

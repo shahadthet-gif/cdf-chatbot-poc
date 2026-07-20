@@ -208,15 +208,12 @@
     }
   }
 
-  
-  var MIN_TRANSITION_READ_MS = 400; // let the user read "connecting..." before the (fallback-only) swap
-
   function performHandoff(transitionText) {
     if (handedOff) return;
     handedOff = true;
     addBotBubble(transitionText || TEXT[currentLang()].handoffTransition);
 
-   
+
     window.cdfLiveChat.start(
       chatwootSessionId,
       function onConnected() {
@@ -226,26 +223,15 @@
         addBotBubble(text);
       },
       function onFallback() {
-        // Tier 2: proxy unreachable — fall back to the embedded widget.
-        var shownAt = Date.now();
-        window.cdfTriggerHandoff(function () {
-          if (!handedOff) return; // cdf:handoff-unavailable fired synchronously first
-          var wait = Math.max(0, MIN_TRANSITION_READ_MS - (Date.now() - shownAt));
-          setTimeout(function () {
-            panel.classList.add("hidden");
-            launcher.style.display = "none";
-          }, wait);
-        });
+        // The proxy (and/or the Chatwoot account behind it) is unreachable —
+        // stay inside our own panel rather than popping the separate
+        // official Chatwoot widget, which looks and behaves nothing like it.
+        addBotBubble(TEXT[currentLang()].handoffUnavailable);
+        handedOff = false;
       }
     );
   }
 
-  window.addEventListener("cdf:handoff-unavailable", function () {
-    addBotBubble(TEXT[currentLang()].handoffUnavailable);
-    handedOff = false;
-  });
-
- 
   function sendToRasa(message) {
     showTyping();
     return fetch(RASA_URL, {
