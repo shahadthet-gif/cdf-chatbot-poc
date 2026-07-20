@@ -12,7 +12,11 @@ intents:
   - show_learn_more_menu
   - show_contact_menu
   - ask_about_funding_services
+  - ask_about_investment
   - ask_about_enablement_services
+  - ask_about_incubator
+  - ask_about_incentives
+  - ask_about_accelerators
   - ask_about_strategy
   - ask_about_success_stories
   - ask_about_visual_identity
@@ -102,10 +106,12 @@ responses:
         - type: slot
           name: language
           value: "ar"
-      text: "التقديم على الخدمات"
+      text: "يقدم الصندوق الثقافي مجموعة واسعة من خدمات التمويل، والاستثمار، وتمكين ريادة الأعمال. ما الخدمة التي تريدها؟"
       buttons:
         - title: "التمويل الثقافي"
           payload: '/ask_about_funding_services'
+        - title: "الاستثمار"
+          payload: '/ask_about_investment'
         - title: "خدمات نماء التمكينية"
           payload: '/ask_about_enablement_services'
         - title: "🔙 العودة للقائمة الرئيسة"
@@ -114,10 +120,12 @@ responses:
         - type: slot
           name: language
           value: "en"
-      text: "Apply for Services"
+      text: "The CDF offers a wide range of financing, investment, and entrepreneurship enablement services. Which service are you looking for?"
       buttons:
-        - title: "Cultural Funding"
+        - title: "Cultural Financing"
           payload: '/ask_about_funding_services'
+        - title: "Investment"
+          payload: '/ask_about_investment'
         - title: "Namaa Enablement Services"
           payload: '/ask_about_enablement_services'
         - title: "🔙 Back to Main Menu"
@@ -231,21 +239,137 @@ responses:
         - title: "🔙 Back to Main Menu"
           payload: '/show_menu'
 
-  utter_ask_about_enablement_services:
+  utter_ask_about_investment:
     - condition:
         - type: slot
           name: language
           value: "ar"
-      text: "خدمات نماء التمكينية تقدّم الدعم غير المالي للممارسين والمنشآت الثقافية، مثل الاستشارات والتدريب وبناء القدرات."
+      text: "يُتيح الصندوق الثقافي فرصة الاستثمار في القطاع الثقافي، من خلال الاستثمار المباشر أو بالشراكة مع القطاع الخاص."
       buttons:
+        - title: "لتقديم فرصة استثمارية"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "للمزيد"
+          payload: 'https://cdf.gov.sa/services'
         - title: "🔙 العودة للقائمة الرئيسة"
           payload: '/show_menu'
     - condition:
         - type: slot
           name: language
           value: "en"
-      text: "Namaa's enablement services provide non-financial support to cultural practitioners and enterprises, such as consulting, training, and capacity building."
+      text: "The Cultural Development Fund offers investment opportunities across the cultural sector through direct investment or in partnerships with the private sector."
       buttons:
+        - title: "Submit an Investment Proposal"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "More"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_enablement_services:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "توفر خدمات نماء التمكينية حلولاً مخصصة لتمكين القدرات الريادية في القطاع الثقافي. ما الخدمة التي تريدها؟"
+      buttons:
+        - title: "الحاضنة"
+          payload: '/ask_about_incubator'
+        - title: "الحوافز"
+          payload: '/ask_about_incentives'
+        - title: "المسرعات"
+          payload: '/ask_about_accelerators'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Nama'a Enablement Services offer tailored solutions to empower entrepreneurship in the cultural sector. Which service are you looking for?"
+      buttons:
+        - title: "Incubator"
+          payload: '/ask_about_incubator'
+        - title: "Incentives"
+          payload: '/ask_about_incentives'
+        - title: "Accelerators"
+          payload: '/ask_about_accelerators'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_incubator:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "خدمات متنوعة معنية بتمكين القدرات الريادية للمبدعين ورواد الأعمال والمنشآت."
+      buttons:
+        - title: "للتقديم"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "للمزيد"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Services that empower creatives, entrepreneurs, and enterprises to build and develop their ventures in the cultural sector."
+      buttons:
+        - title: "Apply"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "More"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_incentives:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "مجموعة من الحوافز المالية المصممة لدعم المنشآت الثقافية في مجالات محددة."
+      buttons:
+        - title: "للتقديم"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "للمزيد"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "A range of financial incentives designed to support cultural enterprises in specific themes."
+      buttons:
+        - title: "Apply"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "More"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 Back to Main Menu"
+          payload: '/show_menu'
+
+  utter_ask_about_accelerators:
+    - condition:
+        - type: slot
+          name: language
+          value: "ar"
+      text: "مسارات مخصصة لقطاعات ثقافية مختارة، تقدم للمنشآت رحلة تدريبية وتطويرية متكاملة."
+      buttons:
+        - title: "للتقديم"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "للمزيد"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "🔙 العودة للقائمة الرئيسة"
+          payload: '/show_menu'
+    - condition:
+        - type: slot
+          name: language
+          value: "en"
+      text: "Specialized tracks for selected cultural sectors offering a structured training and development journey for enterprises."
+      buttons:
+        - title: "Apply"
+          payload: 'https://cdf.gov.sa/services'
+        - title: "More"
+          payload: 'https://cdf.gov.sa/services'
         - title: "🔙 Back to Main Menu"
           payload: '/show_menu'
 

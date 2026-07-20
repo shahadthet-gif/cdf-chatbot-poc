@@ -87,6 +87,19 @@ nlu:
     - هل تقدمون قروض
     - التمويل الثقافي
 
+- intent: ask_about_investment
+  examples: |
+    - tell me about investment opportunities
+    - how can I invest with the fund
+    - do you invest in cultural projects
+    - I want to submit an investment proposal
+    - what investment options are available
+    - ما هي فرص الاستثمار
+    - كيف أستثمر مع الصندوق
+    - أريد تقديم فرصة استثمارية
+    - هل تستثمرون في مشاريع ثقافية
+    - الاستثمار
+
 - intent: ask_about_enablement_services
   examples: |
     - what is namaa
@@ -99,6 +112,33 @@ nlu:
     - هل تقدمون استشارات
     - أريد معرفة خدمات نماء
     - خدمات التمكين
+
+- intent: ask_about_incubator
+  examples: |
+    - tell me about the incubator
+    - what does the incubator program offer
+    - I want to join the incubator
+    - ما هي خدمات الحاضنة
+    - أريد الانضمام للحاضنة
+    - الحاضنة
+
+- intent: ask_about_incentives
+  examples: |
+    - tell me about the incentives
+    - what financial incentives do you offer
+    - what incentives are available
+    - ما هي الحوافز المتاحة
+    - أريد معرفة الحوافز المالية
+    - الحوافز
+
+- intent: ask_about_accelerators
+  examples: |
+    - tell me about the accelerator program
+    - what do the accelerators offer
+    - I want to join an accelerator
+    - ما هي برامج المسرعات
+    - أريد الانضمام لبرنامج مسرعات
+    - المسرعات
 
 - intent: show_apply_menu
   examples: |

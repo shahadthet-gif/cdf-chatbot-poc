@@ -15,8 +15,34 @@ stories:
     - action: utter_ask_about_funding_services
     - intent: show_menu
     - action: utter_show_menu
+    - intent: show_apply_menu
+    - action: utter_show_apply_menu
+    - intent: ask_about_investment
+    - action: utter_ask_about_investment
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_apply_menu
+    - action: utter_show_apply_menu
     - intent: ask_about_enablement_services
     - action: utter_ask_about_enablement_services
+    - intent: ask_about_incubator
+    - action: utter_ask_about_incubator
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_apply_menu
+    - action: utter_show_apply_menu
+    - intent: ask_about_enablement_services
+    - action: utter_ask_about_enablement_services
+    - intent: ask_about_incentives
+    - action: utter_ask_about_incentives
+    - intent: show_menu
+    - action: utter_show_menu
+    - intent: show_apply_menu
+    - action: utter_show_apply_menu
+    - intent: ask_about_enablement_services
+    - action: utter_ask_about_enablement_services
+    - intent: ask_about_accelerators
+    - action: utter_ask_about_accelerators
     - intent: thank_you
     - action: utter_thank_you
     - intent: goodbye
