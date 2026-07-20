@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
        - name: website
-         image: cdfchatbot-website:v3
+         image: cdfchatbot-website:v4
          imagePullPolicy: IfNotPresent
          ports:
           - containerPort: 5500
