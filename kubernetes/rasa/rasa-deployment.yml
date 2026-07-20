@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
        - name: rasa
-         image: cdfchatbot-rasa:latest
+         image: cdfchatbot-rasa:v2
+         imagePullPolicy: IfNotPresent
          ports:
           - containerPort: 7860
