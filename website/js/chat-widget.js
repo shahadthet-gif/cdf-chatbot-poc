@@ -1,20 +1,9 @@
-/**
- * Custom chat widget wired to a locally-running Rasa REST channel.
- * Rasa must be started with: rasa run --enable-api --cors "*" ...
- * (see rasa-bot/README.md)
- */
+
 (function () {
   "use strict";
 
-  // Same static files serve both local dev and the deployed Render site
-  // (no build step), so the right backend is picked at runtime based on
-  // where the page itself is being viewed from — never hardcode one or
-  // the other here.
-  var IS_LOCAL = ["localhost", "127.0.0.1"].indexOf(location.hostname) !== -1;
-  // Rasa itself runs on Hugging Face Spaces (see rasa-bot/README.md) rather
-  // than Render — Render's free tier (512MB RAM) isn't enough for
-  // Rasa + TensorFlow at runtime; HF Spaces' free CPU tier (16GB) is.
-  var RASA_URL = (IS_LOCAL ? "http://localhost:7860" : "https://shahadalh-3-cdf-chatbot-rasa.hf.space") + "/webhooks/rest/webhook";
+  
+  var RASA_URL = "/rasa/webhooks/rest/webhook";
 
   var TEXT = {
     ar: {
@@ -39,10 +28,7 @@
     return document.documentElement.lang === "en" ? "en" : "ar";
   }
 
-  // The language used inside the chat can diverge from the site-wide
-  // chrome language (e.g. user picks English in the chat, then later
-  // flips the site nav back to Arabic) — track it separately once the
-  // user makes an explicit choice inside the conversation.
+  
   var chatLang = siteLang();
   var chatLangLocked = false;
 
@@ -64,15 +50,9 @@
   var conversationStarted = false;
   var handedOff = false;
 
-  // Deliberately NOT persisted (unlike senderId above) — a fresh id every
-  // page load means a fresh Chatwoot conversation every visit, instead of
-  // silently reattaching to (and replaying the full history of) whatever
-  // conversation this browser started last time.
   var chatwootSessionId = "cdf-cw-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
 
-  // ---------------------------------------------------------------
-  // DOM construction
-  // ---------------------------------------------------------------
+  
   var root = document.getElementById("cdf-chat-root");
 
   var launcher = document.createElement("button");
@@ -127,16 +107,12 @@
     refreshChrome();
   });
 
-  // ---------------------------------------------------------------
-  // Rendering
-  // ---------------------------------------------------------------
+  
   function scrollToBottom() {
     bodyEl.scrollTop = bodyEl.scrollHeight;
   }
 
-  // The panel chrome stays RTL, but individual message text must follow
-  // whichever language the conversation is actually in — otherwise English
-  // bubbles get bidi-reordered (emoji/punctuation jump to the wrong side).
+  
   function bubbleDir() {
     return currentLang() === "en" ? "ltr" : "rtl";
   }
@@ -189,8 +165,7 @@
       btn.type = "button";
       btn.textContent = b.title;
       btn.addEventListener("click", function () {
-        // A button pointing at a real cdf.gov.sa page opens it in a new tab
-        // instead of sending a message — it's not part of the conversation.
+       
         if (/^https?:\/\//.test(b.payload)) {
           window.open(b.payload, "_blank", "noopener");
           return;
@@ -233,9 +208,7 @@
     }
   }
 
-  // ---------------------------------------------------------------
-  // Handoff
-  // ---------------------------------------------------------------
+  
   var MIN_TRANSITION_READ_MS = 400; // let the user read "connecting..." before the (fallback-only) swap
 
   function performHandoff(transitionText) {
@@ -243,8 +216,7 @@
     handedOff = true;
     addBotBubble(transitionText || TEXT[currentLang()].handoffTransition);
 
-    // Tier 1: proxy + Chatwoot's official Application API — agent replies
-    // render as normal bubbles right here, our panel never hides.
+   
     window.cdfLiveChat.start(
       chatwootSessionId,
       function onConnected() {
@@ -273,9 +245,7 @@
     handedOff = false;
   });
 
-  // ---------------------------------------------------------------
-  // Rasa transport
-  // ---------------------------------------------------------------
+ 
   function sendToRasa(message) {
     showTyping();
     return fetch(RASA_URL, {
@@ -314,8 +284,7 @@
     if (!text) return;
     inputEl.value = "";
     addUserBubble(text);
-    // Once handed off (Tier 1 succeeded, panel stays visible), route typed
-    // messages to the live-chat proxy instead of Rasa.
+   
     if (handedOff) {
       window.cdfLiveChat.sendMessage(chatwootSessionId, text);
     } else {
@@ -328,9 +297,7 @@
     if (e.key === "Enter") sendUserText();
   });
 
-  // ---------------------------------------------------------------
-  // Open / close
-  // ---------------------------------------------------------------
+  
   function openPanel() {
     panel.classList.remove("hidden");
     if (!conversationStarted) {

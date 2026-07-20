@@ -1,4 +1,4 @@
-FROM python:3.14 
-WORKDIR /app
-COPY . . 
-CMD ["python", "serve.py"]
+FROM nginx:latest
+
+COPY . /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
